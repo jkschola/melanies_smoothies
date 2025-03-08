@@ -1,6 +1,5 @@
 # Import python packages
 import streamlit as st              # Used for creating interactive web apps in Python.
-from snowflake.snowpark.context import get_active_session       # Connects to Snowflake's active session.
 from snowflake.snowpark.functions import col        # Helps select columns from a Snowflake table.
 
 
@@ -18,8 +17,9 @@ st.write(
 name_on_order = st.text_input('Name on Smoothie')
 st.write('The name on your Smoothie will be:', name_on_order)
 
-# Snowflake Session
-session = get_active_session()
+# Session
+cnx = st.connection("snowflake")
+session = cnx.session()
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 # st.dataframe(data=my_dataframe, use_container_width=True)

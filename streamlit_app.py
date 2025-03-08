@@ -1,6 +1,7 @@
 # Import python packages
 import streamlit as st              # Used for creating interactive web apps in Python.
 from snowflake.snowpark.functions import col        # Helps select columns from a Snowflake table.
+import requests
 
 
 # Write directly to the app
@@ -54,3 +55,11 @@ if ingredients_list:
         
         st.success('Your Smoothie is ordered,' + name_on_order + '!', icon="✅")
         # st.success(f'Your Smoothie is ordered, {name_on_order}!', icon="✅")
+
+# New section to display smoothiefroot nutrition information
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
+
+
+
+
